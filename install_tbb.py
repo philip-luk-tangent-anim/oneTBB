@@ -40,10 +40,10 @@ def copy_dir(src_dir, dst_dir):
 if __name__ == '__main__':
     cmake_args = ['cmake',
                   '-g "Ninja"',
-                  '-D TBB_BUILD_SHARED=ON',
-                  '-D TBB_BUILD_TBBMALLOC=ON',
-                  '-D TBB_BUILD_TBBMALLOC_PROXY=ON',
-                  '-D TBB_BUILD_STATIC=ON',
+                  '-DTBB_BUILD_SHARED=ON',
+                  '-DTBB_BUILD_TBBMALLOC=ON',
+                  '-DTBB_BUILD_TBBMALLOC_PROXY=ON',
+                  '-DTBB_BUILD_STATIC=ON',
                   os.environ.get('REZ_BUILD_SOURCE_PATH'),
                  ]
     run_command(cmake_args, os.environ.get('REZ_BUILD_PATH'))
