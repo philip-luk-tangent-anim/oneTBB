@@ -17,8 +17,8 @@ build_requires = [
 ]
 
 variants = [
-    ['platform-windows', 'arch-x86_64'],
-    ['platform-linux', 'arch-x86_64'],
+    ['platform-windows'],
+    ['platform-linux'],
 ]
 
 build_command = "python {root}/install_tbb.py"

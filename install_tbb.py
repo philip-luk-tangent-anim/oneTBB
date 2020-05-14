@@ -42,6 +42,8 @@ if __name__ == '__main__':
     cmake_cmd_list = [
         'cmake',
         '-g "Ninja"',
+        '-DCMAKE_BUILD_TYPE={}'.format(os.environ.get('__PARSE_ARG_BUILD_CONFIG')),
+        '-DCMAKE_VERBOSE_MAKEFILE={}'.format(os.environ.get('__PARSE_ARG_BUILD_VERBOSE')),
         '-DTBB_BUILD_SHARED=ON',
         '-DTBB_BUILD_TBBMALLOC=ON',
         '-DTBB_BUILD_TBBMALLOC_PROXY=ON',
@@ -52,9 +54,12 @@ if __name__ == '__main__':
 
     # Do the build.
     cmake_cmd_list = ['cmake', '--build', '.']
+    if int(os.environ.get('__PARSE_ARG_BUILD_JOBS_NUM')) > 0:
+        cmake_cmd_list.append('--')
+        cmake_cmd_list.append('-j{}'.format(os.environ.get('__PARSE_ARG_BUILD_JOBS_NUM')))
     run_command(cmake_cmd_list, os.environ.get('REZ_BUILD_PATH'))
 
-    if bool(os.environ['REZ_BUILD_INSTALL']):
+    if int(os.environ['REZ_BUILD_INSTALL']) != 0:
         # Do the installation to the REZ repository.
         cmake_cmd_list = [
             'cmake',
